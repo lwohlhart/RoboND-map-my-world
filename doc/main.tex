@@ -1,0 +1,85 @@
+%% V1.0
+%% by Gabriel Garcia, gabrcg@gmail.com
+%% This is a template for Udacity projects using IEEEtran.cls
+
+%% Be Udacious!
+
+\documentclass[10pt,journal,compsoc]{IEEEtran}
+
+\usepackage[pdftex]{graphicx}    
+\usepackage{cite}
+\usepackage{hyperref}
+\usepackage{subcaption}
+% \hyphenation{op-tical net-works semi-conduc-tor}
+
+\begin{document}
+
+\title{Map My World}
+
+\author{Lucas Wohlhart}
+
+\markboth{Localization project, Robotics Nanodegree Program, Udacity}%
+{}
+\IEEEtitleabstractindextext{%
+
+\begin{abstract}
+% Abstract - Give a high-level overview of work.
+% Abstract - Student gives a high-level overview of what is being attempted in the report. Abstracts are typically 5-10 sentences that provide just enough context to understand the gist of the report.
+
+\end{abstract}
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+Robot, IEEEtran, Udacity, \LaTeX, Localization.
+\end{IEEEkeywords}}
+
+
+\maketitle
+\IEEEdisplaynontitleabstractindextext
+\IEEEpeerreviewmaketitle
+\section{Introduction}
+\label{sec:introduction}
+% Introduction - Explain the concept of the project and what is trying to be achieved.
+% Introduction - Student can clearly and accurately explain the problem domain.
+
+\IEEEPARstart{T}{he} 
+
+
+%example for inserting image
+%\begin{figure}[thpb]
+%      \centering
+%      \includegraphics[width=\linewidth]{img/maze_world}
+%      \caption{Maze environment}
+%      \label{fig:maze}
+%\end{figure}
+
+
+
+\section{Background}
+% Background - Explain the importance of both mapping two and three dimensional space.
+% Background - The student provides a sufficient background into the scope of the problem / technologically while also identifying some of the current challenges in robot mapping and why the problem domain is an important piece of robotics. They further discuss and compare mapping algorithms
+
+\section{Scene and robot configuration}
+% Scene and robot configuration - Explain how your personal Gazebo world was created and what is the layout of it. Justify your choice of robot parameters, sensor location, and how you decided to configure your package structure.
+% Scene and robot configuration - Student explains how the gazebo world was created by providing an overview of the layout of items in his/her customized Gazebo world. Student also describes the robot's parameters, sensor features, and reasoning on the package structure.
+
+
+\section{Results}
+
+% Results - Show the results of both occupancy grid and 3D map.
+% Results - The student should include the images for mapping process, final map (2D/3D) for both Gazebo worlds.
+
+\section{Discussion}
+% Discussion - What went well, what went wrong. Reflect upon the results of your robot's performance, and the performance of mapping in both worlds. Justify your answers with facts.
+
+% Discussion - The student explains how the procedure went and methodologies to improve it. The student should compare and contrast the performance of RTAB Mapping in different worlds.
+
+\section{Conclusion / Future work}
+% Future Work - Student discusses future desires with RTAB-Map. Talk about any robots and environment they applied this too.
+% "Future Work - The student can discuss how they would like to leverage this tool in robotics. The student identifies other areas where mapping could be done and for what reason. Such as simulated room or physical place.
+% [Optional] The student applies RTAB Mapping to a real robot."
+
+\bibliography{bib}
+\bibliographystyle{ieeetr}
+
+\end{document}
