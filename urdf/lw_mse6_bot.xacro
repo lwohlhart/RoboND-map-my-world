@@ -2,8 +2,8 @@
 
 <robot name="lw_mse6_bot" 
     xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:include filename="$(find udacity_bot)/urdf/lw_mse6_bot.gazebo"/>
-    <xacro:include filename="$(find udacity_bot)/urdf/macros.xacro" />
+    <xacro:include filename="$(find slam_project)/urdf/lw_mse6_bot.gazebo"/>
+    <xacro:include filename="$(find slam_project)/urdf/macros.xacro" />
     <xacro:property name="PI" value="3.1415926535897931"/>
     <xacro:property name="epsilon" value="0.0001"/>
 
@@ -60,6 +60,12 @@
         <parent link="chassis"/>
         <child link="camera"/>
     </joint>
+    
+    <joint name="camera_rgbd_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="-${pi/2} 0 -${pi/2}"/>
+        <parent link="camera"/>
+        <child link="camera_rgbd_frame"/>
+    </joint>
 
     <joint name="hokuyo_joint" type="fixed">
         <origin xyz="0.2 0.0 0.15" rpy="0.0 0.0 0.0"/>
@@ -77,7 +83,7 @@
         <visual name="">
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <mesh filename="package://udacity_bot/meshes/lw_mse6_chassis.dae"/>
+                <mesh filename="package://slam_project/meshes/lw_mse6_chassis.dae"/>
             </geometry>
         </visual>
         <collision name='collision'>
@@ -88,7 +94,7 @@
             </geometry>-->
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <mesh filename="package://udacity_bot/meshes/lw_mse6_chassis.dae"/>
+                <mesh filename="package://slam_project/meshes/lw_mse6_chassis.dae"/>
             </geometry>
         </collision>
 
@@ -194,6 +200,8 @@
         </collision>
     </link>
 
+    <link name="camera_rgbd_frame"></link>
+
     <link name="hokuyo">
         <inertial>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -203,7 +211,7 @@
         <visual name="">
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
             <geometry>
-                <mesh filename="package://udacity_bot/meshes/hokuyo.dae"/>
+                <mesh filename="package://slam_project/meshes/hokuyo.dae"/>
             </geometry>
         </visual>
         <collision>
