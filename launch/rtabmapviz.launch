@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For visualising your robots map in rtabmapviz -->
+
+<launch>
+  <group ns="rtabmap">
+    <node pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" output="screen">
+      <param name="frame_id" type="string" value="robot_fooprint"/>
+      <remap from="rgb/image" to="/camera/rgb/image_raw"/>
+      <param name="rgb/image_transport" type="string" value="compressed"/>
+    </node>
+  </group>
+</launch>
