@@ -44,6 +44,10 @@
             <!-- Used to extract more or less SURF features -->
             <param name="SURF/HessianThreshold" type="string" value="100"/>
 
+            <!-- Reduce OptimizeMaxError from 1 to 0.1 to prevent relatively frequent false-positive detection of loop closure -->
+            <!--  as suggested in https://answers.ros.org/question/271481/rtabmap-issue-with-loop-closure/ -->
+            <param name="RGBD/OptimizeMaxError" type="double" value="0.1"/>
+
             <!-- Loop Closure Constraint -->
             <!-- 0=Visual, 1=ICP (1 requires scan)-->
             <param name="Reg/Strategy" type="string" value="0"/>
