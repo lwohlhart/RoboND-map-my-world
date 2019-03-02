@@ -7,6 +7,9 @@
     <arg name="gui" default="true"/>
     <arg name="headless" default="false"/>
     <arg name="debug" default="false"/>
+    <arg name="x" default="0"/>
+    <arg name="y" default="0"/>
+    <arg name="z" default="0"/>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(arg world_file)"/>
@@ -20,7 +23,9 @@
     <include file="$(find slam_project)/launch/robot_description.launch"/>
 
     <!-- spawn lw_mse6_bot in udacity.world environment -->
-    <node name="urdf_launcher" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -param robot_description -model lw_mse6_bot"/>
+    <node name="urdf_launcher" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+          args="-urdf -param robot_description -model lw_mse6_bot -x $(arg x) -y $(arg y) -z $(arg z)"/>
+
 
     <!--launch rviz-->
     <!-- <node name="rviz" pkg="rviz" type="rviz" respawn="false"/> -->
