@@ -25,3 +25,13 @@ roslaunch slam_project rtabmapviz.launch
 
 roslaunch slam_project mapping.launch
 ```
+
+the resulting map databases of two provided environments can be downloaded here
+
+mapping result for factory kitchen dining
+https://drive.google.com/file/d/1VVCpNJqbN68czs2tuCf4eO4ZA71hlbG3/view?usp=sharing
+
+mapping result for factory room
+https://drive.google.com/file/d/1LaAt-BkkA_ElU2PFdP4EnEH0_WhoaUIv/view?usp=sharing
+
+
