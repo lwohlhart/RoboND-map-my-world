@@ -23,7 +23,7 @@
 \IEEEtitleabstractindextext{%
 
 \begin{abstract}
-In this project techniques to solve the  crucial task of simultaneous localization and mapping (SLAM) will be explored. For this purpose a robot, previously designed for a localization project\cite{LWMSE6botLocalization}, is extended with regards to it's sensory capabilities. Additionally to its laser based range scanner, IMU and wheel encoders an RGB-D camera is mounted. The SLAM method used is based on RTAB-Map Real-Time Appearance-Based Mapping proposed in \cite{LabbeRTABMap}, which is graph SLAM algorithm implementing vision-based loop closure detection. To evaluate its performance, the aforementioned robot is placed in two different simulated environments, one of which is provided by Udacity and the other is created within this project. The robot is then teleoperated through the world and creates a 2D occupancy grid map and a 3D map using the SLAM algorithm.
+In this project techniques to solve the  crucial task of simultaneous localization and mapping (SLAM) will be explored. For this purpose a robot, previously designed for a localization project\cite{LWMSE6botLocalization}, is extended with regards to its sensory capabilities. Additionally to its laser based range scanner, IMU and wheel encoders an RGB-D camera is mounted. The SLAM method used is based on RTAB-Map Real-Time Appearance-Based Mapping proposed in \cite{LabbeRTABMap}, which is a graph SLAM algorithm implementing vision-based loop closure detection. To evaluate its performance, the aforementioned robot is placed in two different simulated environments, one of which is provided by Udacity and the other is created within this project. The robot is then teleoperated through the world and creates a 2D occupancy grid map and a 3D map using the SLAM algorithm.
 
 \end{abstract}
 
@@ -52,7 +52,7 @@ The goal of the project is the creation of satisfactory mappings of two simulate
 
 As previously described the SLAM problem is a very important aspect of mobile robotics especially for localization, planning and obstacle avoidance. Therefore the research community has come up with a plethora of methods to tackle this challenging task.
 
-SLAM itself is divided into two different problem sets. Solving the so called online SLAM problem means estimating the current pose and map based only on current measurements and controls, whereas full SLAM poses the challenge of estimating the entire trajectory of poses a robot has passed through and a map based all previous and current measurements and controls.
+SLAM itself is divided into two different problem sets. Solving the so called online SLAM problem means estimating the current pose and map based only on current measurements and controls, whereas full SLAM poses the challenge of estimating the entire trajectory of poses a robot has passed through and a map based on all previous and current measurements and controls.
 Since the estimated map is based on the estimated poses and vice versa, these estimates have to be optimized jointly. Facing a vast hypothesis space, unavoidable sensor noise and perceptual ambiguity of detectable features makes solving the SLAM problem hard.
 
 The following list gives a quick overview over some of the methods used to solve this challenging task.
@@ -60,7 +60,7 @@ The following list gives a quick overview over some of the methods used to solve
 \subsection{Occupancy Grid Map}
 
 The occupancy grid mapping algorithm divides the mappable space into a grid of evenly spaced cells. Each grid cell represents an independent binary random variable indicating the probability of the location being occupied or free. When a robot moves through an environment and senses its surroundings, the sensor data is projected to the grid map domain where it is used to update the occupancy probability of the observed cells. The readings of a range sensor, such as a laser- or a sonic range finder can for example provide evidence that the cells up to the point of reflection are free and that there's an obstacle at the reflection point. This kind of sensor data is usually modelled with a cone, depicted in Fig.\ref{fig:occupancy_grid_sensor_model}, to account for sensor specific uncertainties.
-The occupancy grid map algorithm uses log-odds to model the cell probabilities,providing numerical stability and allowing for simple addition of log-odds when performing an update on a cell. Each incoming sensor reading is used to update the cells that are currently in the field of view of the robot, leaving the others unchanged.
+The occupancy grid map algorithm uses log-odds to model the cell probabilities, providing numerical stability and allowing for simple addition of log-odds when performing an update on a cell. Each incoming sensor reading is used to update the cells that are currently in the field of view of the robot, leaving the others unchanged.
 
 Since the algorithm itself doesn't provide a method to estimate the robots pose, one has to use odometry data from sensors such as the IMU, wheel encoders and/or GPS to estimate it.
 
@@ -74,10 +74,10 @@ Since the algorithm itself doesn't provide a method to estimate the robots pose,
 \subsection{FastSLAM}
 
 The FastSLAM algorithm is based on a particle filter approach and requires known landmarks. Each particle holds a possible trajectory of the robot poses and a corresponding estimated map. The features of the map are modelled as local gaussians. 
-It estimates a posterior over the robot path using a low dimensional Extended Kalman Filter to solve the independent map features. Being able to jointly estimate the robot trajectory and the map means that FastSLAM is able to solve the full SLAM problem. Every particle filter update step begins by sampling from the probabilistic motion model based on the current particles and the executed motion command yielding a temporary set of particles \cite{montemerlo_fastslam}. This particle distribution is referred to as the \textit{proposal distribution}. They model the instantaneous pose of the robot, which is why the algorithm is also capable of solving the online SLAM problem. The filter update is then completed by resampling from this newly weighted temporary particle set to achieve a joint optimization of the entire trajectory and the map.
+It estimates a posterior over the robot path using a low dimensional Extended Kalman Filter to solve the independent map features. Being able to jointly estimate the robot trajectory and the map means that FastSLAM is able to solve the full SLAM problem. Every particle filter update step begins by sampling from the probabilistic motion model based on the current particles and the executed motion command yielding a temporary set of particles \cite{montemerlo_fastslam}. This particle distribution is referred to as the \textit{proposal distribution}. These particles model the instantaneous pose of the robot, which is why the algorithm is also capable of solving the online SLAM problem. The filter update is then completed by resampling from this newly weighted proposal distribution to achieve a joint optimization of the entire trajectory and the map.
 
 \subsubsection{FastSLAM 1.0 and FastSLAM 2.0}
-FastSLAM 1.0 is considered a powerfull tool to solve the SLAM problem, yet it is known to be sample inefficient. FastSLAM 2.0\cite{montemerlo_fastslam_2_0} improves this deficit by modifying the way the previously described proposal distribution is acquired. While the previous version of the algorithm just uses the motion commands (which is unfortunately known to be a rather noisy source of data) to sample the instantaneous pose, FastSLAM 2.0 also incorporates the current measurements to yield a more meaningfull set of particles for the following resampling step.
+The above mentioned FastSLAM 1.0 is considered a powerfull tool to solve the SLAM problem, yet it is known to be sample inefficient. FastSLAM 2.0\cite{montemerlo_fastslam_2_0} improves this deficit by modifying the way the previously described proposal distribution is acquired. While the previous version of the algorithm just uses the motion commands (which is unfortunately known to be a rather noisy source of data) to sample the instantaneous pose, FastSLAM 2.0 also incorporates the current measurements to yield a more meaningfull set of particles for the following resampling step.
 
 \subsubsection{Grid-based FastSLAM}
 The Grid-based FastSLAM algorithm eliminates the necessity of predefining landmarks by combining the concept of FastSLAM with an occupancy grid approach as replacement. Each particle now holds its own grid map and each one of them is updated according to occupancy grid mapping algorithm. This enables the Grid-based FastSLAM algorithm to be applied in entirely unknown scenarios.
@@ -93,7 +93,7 @@ The Graph-SLAM\cite{thrun_graph_2006} algorithm takes the different approach of 
 \end{figure}
 
 The so called \textit{Front-End} of the algorithm is concerned with the creation and insertion of such nodes based on motion commands, odometry data and sensor readings.
-The \textit{Back-End} of GraphSLAM uses the entire graph to perform graph optimization based on maximum likelihood estimation (MLE). It tries to find the best configuration of nodes that yields the smallest error based on all the constraints introduced by all nodes. This method makes a GraphSLAM capable of solving the full SLAM problem, in a relatively efficient manner.
+The \textit{Back-End} of GraphSLAM uses the entire graph to perform graph optimization based on maximum likelihood estimation (MLE). It tries to find the best configuration of nodes that yields the smallest error based on all the constraints introduced by the nodes. This method makes a GraphSLAM capable of solving the full SLAM problem, in a relatively efficient manner.
 
 \subsubsection{RTAB-Map}
 RTAB-Map is an RGB-D GraphSLAM method implementing Real-Time Appearance-Based Mapping with incremental vision-based loop closure detection. In appearance based methods, a robot uses visual features to localize itself which also enables the identification of previously observed locations based on matching them to stored reference features. Reencountering such known locations allows for loop closure detection which can greatly improve pose estimation and yield a more robust and coherent mapping result.
@@ -106,7 +106,7 @@ RTAB-Map is optimized for longterm, large scale SLAM and therefore implements a 
     \item Working Memory (WM)
     \item Long-Term Memory (LTM)
 \end{itemize}
-The STM holds the most recent nodes encountered by the robot. It is not considered for loop closure detection because these nodes by nature very similar to each other. Once the amount of nodes in the Short-Term Memory exceeds is fixed size nodes are transferred to the WM.
+The STM holds the most recent nodes encountered by the robot. It is not considered for loop closure detection because these nodes are by nature very similar to each other. Once the amount of nodes in the Short-Term Memory exceeds its fixed size, nodes are transferred to the WM.
 
 The nodes in WM are used for loop closure detection as well as graph optimization. The amount of nodes in the WM is determined by the time it takes to perform optimization and loop closure detection. Once the realtime threshold is exceeded, nodes get transferred to LTM.
 
